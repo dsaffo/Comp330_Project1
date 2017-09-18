@@ -2,7 +2,7 @@
 """
 Created on Mon Sep 18 15:10:15 2017
 
-@author: dsaffo
+@author: dsaffo, jramirez09
 """ 
 
 def main():
