@@ -1,6 +1,8 @@
 Comp 330 Project One (note organizer thingy)
 David Saffo, Jorge Ramirez
 
+**Python  v3
+
 Files and Folders:
 
 1. FunctionTests.ipynb
