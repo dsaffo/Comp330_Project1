@@ -6,6 +6,11 @@ Created on Thu Sep 21 19:50:51 2017
 """
 import os
 import re
+import glob
+
+def new_load_files(dir):
+    return glob.glob(dir + "/*.txt")
+
 
 def load_files(dir):                                                                                                  
     print("Loading Files")
