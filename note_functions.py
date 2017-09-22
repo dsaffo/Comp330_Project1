@@ -41,8 +41,8 @@ def sort_notes(files,path):
         file.close()
         #print(files[f])
         marks = re.findall(r'\B[@#!^]\w+', file_str) #regex for marker
-        urls = re.findall(r'(?:[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*\.)+[-a-zA-Z@:%_\+~#?&//=]{2,256}',file_str #regex for urls
-        doms = ['.com','.org','.net','.edu','.gov'] #url filter for common urls
+        urls = re.findall(r'(?:[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*\.)+[-a-zA-Z@:%_\+~#?&//=]{2,256}',file_str) #regex for urls
+        doms = ['.com','.org','.net','.edu','.gov'] #url filter for only common domains
         for u in urls:
             for d in doms:
                 if d in u:
