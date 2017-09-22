@@ -4,14 +4,18 @@ Created on Thu Sep 21 19:50:51 2017
 
 @author: dsaffo
 """
+
+#Function Lib for sorting and printing 
+
 import os
 import re
 import glob
 
+#test file loader not used
 def new_load_files(dir):
     return glob.glob(dir + "/*.txt")
 
-
+#file loader reads all files in a folder
 def load_files(dir):                                                                                                  
     print("Loading Files")
     r = []                                                                                                            
@@ -23,6 +27,7 @@ def load_files(dir):
                 r.append(subdir + "/" + file)                                                                         
     return r
 
+#sorts the notes into a dictionary for every file were the key is the marker and the value is a list of those markers
 def sort_notes(files,path):
     used_id = []
     
@@ -35,9 +40,9 @@ def sort_notes(files,path):
         file_str = file.read()
         file.close()
         #print(files[f])
-        marks = re.findall(r'\B[@#!^]\w+', file_str)
-        urls = re.findall(r'(?:[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*\.)+[-a-zA-Z@:%_\+~#?&//=]{2,256}',file_str)
-        doms = ['.com','.org','.net','.edu','.gov']
+        marks = re.findall(r'\B[@#!^]\w+', file_str) #regex for marker
+        urls = re.findall(r'(?:[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*\.)+[-a-zA-Z@:%_\+~#?&//=]{2,256}',file_str #regex for urls
+        doms = ['.com','.org','.net','.edu','.gov'] #url filter for common urls
         for u in urls:
             for d in doms:
                 if d in u:
@@ -55,6 +60,7 @@ def sort_notes(files,path):
         all_files.append(file_marks)
     return all_files
 
+#sorts files by a specific mark
 def sort_by_mark(dicts, mark):
     files = []
     for d in dicts:
@@ -64,13 +70,15 @@ def sort_by_mark(dicts, mark):
             files.append(sort)
     return files
 
+#sorts a specific file
 def sort_by_note(dicts,name):
     for d in dicts:
         if name in d['name']:
             return d
     else:
         return "file not found"
- 
+
+#sorts a specific # or @ 
 def sort_by_word(dicts,mark,word):
     words = []
     for d in dicts:
@@ -78,11 +86,12 @@ def sort_by_word(dicts,mark,word):
             words.append(d)
     return words
 
+#sorts all topics and refrences in topological order
 def sort_by_topic(dicts):
     all_topics = []
     roots = []
     children = []
-    for d in dicts:
+    for d in dicts: #read into tuples for easier handling of refrences pointing to topic
         if (len(d['!']) !=0):
             tup = (d['name'],d['!'])
             roots.append(tup)
@@ -91,7 +100,7 @@ def sort_by_topic(dicts):
             children.append(tup)
    
     for r in roots:
-        graph = {'root': (), 'children':[], 'weight': 0}
+        graph = {'root': (), 'children':[], 'weight': 0} #read tuples to a dictionary with a weight of refrences
         for c in children:
             word1 = c[1][0][1:]
             word2 = r[1][0][1:]
@@ -103,9 +112,10 @@ def sort_by_topic(dicts):
                 graph['root'] = r
         all_topics.append(graph)
         
-    topo_sorted = sorted(all_topics, key=lambda k: k['weight'], reverse=True) 
+    topo_sorted = sorted(all_topics, key=lambda k: k['weight'], reverse=True) #sort by weight greatest to least
     return topo_sorted
 
+#helper function to trim file names
 def file_names(files,path):
     names = []
     for f in files:
@@ -114,8 +124,7 @@ def file_names(files,path):
     return names
 
 
-
-
+#prints for the various types of sorts uses *list to print out contents of a list python 3.5 and up only
 def prnt_results_by_note(results):
     print ('File Name:', results['name'])
     for k in results.keys():
