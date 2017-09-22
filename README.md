@@ -1,7 +1,7 @@
 Comp 330 Project One (note organizer thingy)
 David Saffo, Jorge Ramirez
 
-**Python  v3
+**Python  v3.6 minimum used *list in places and it is fairly new
 
 Files and Folders:
 
