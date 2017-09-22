@@ -31,7 +31,7 @@ def sort_notes(files,path):
     for f in range(len(files)):
         fil_url = []
         #name = "file" + str(f)
-        file = open(files[f])
+        file = open(files[f], encoding='cp1252')
         file_str = file.read()
         file.close()
         #print(files[f])

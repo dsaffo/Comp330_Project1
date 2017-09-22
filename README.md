@@ -1,7 +1,8 @@
 Comp 330 Project One (note organizer thingy)
 David Saffo, Jorge Ramirez
 
-**Python  v3.6 minimum used *list in places and it is fairly new
+**Python  v3.5 minimum used *list in places and it is fairly new
+Can be run on cloud 9 by pulling the repo and running it with >python3.5 Note.py
 
 Files and Folders:
 
